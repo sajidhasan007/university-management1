@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "/home/md/Desktop/next level/university-management1/logs/winston/successes/.4693ba601dfbec441ccec8a00cadd8e5b7361113-audit.json",
+    "files": [
+        {
+            "date": 1685893268480,
+            "name": "/home/md/Desktop/next level/university-management1/logs/winston/successes/phu-2023-04-06-21-error.log",
+            "hash": "4bf82c53f489def10c7be436f8b6865ed9c338c14f491f1b0e2863ccbfc649e1"
+        }
+    ],
+    "hashType": "sha256"
+}
