@@ -14,11 +14,11 @@ const createUser = async (user: IUser): Promise<IUser | null> => {
   const createdUser = await User.create(user)
 
   if (!createUser) {
-    throw new Error('Failed to create user!')
+    throw new Error('Failed to create')
   }
   return createdUser
 }
 
-export default {
+export const UserService = {
   createUser,
 }

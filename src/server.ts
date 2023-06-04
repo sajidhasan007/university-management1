@@ -5,7 +5,7 @@ import { errorlogger, logger } from './shared/looger'
 
 async function main() {
   try {
-    await mongoose.connect('mongodb://127.0.0.1:27017/test')
+    await mongoose.connect(config.databaseUrl as string)
     app.listen(config.port, () => {
       logger.info(`Application  listening on port ${config.port}`)
     })
