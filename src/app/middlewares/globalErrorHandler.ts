@@ -1,8 +1,8 @@
 import { ErrorRequestHandler, NextFunction, Request, Response } from 'express'
+import config from '../../config'
 import ApiError from '../../errors/ApiError'
 import handleValidationError from '../../errors/handleValidationError'
 import { IGenericErrorMessage } from '../../interface/error'
-import { logger } from '../../shared/looger'
 
 const globalErrorHandler: ErrorRequestHandler = (
   error,
@@ -15,13 +15,11 @@ const globalErrorHandler: ErrorRequestHandler = (
   let errorMessages: IGenericErrorMessage[] = []
 
   if (error?.name === 'ValidationError') {
-    logger.info(`i am in validation error`)
     const simplifiedError = handleValidationError(error)
     statusCode = simplifiedError.statusCode
     message = simplifiedError.message
     errorMessages = simplifiedError.errorMessages
   } else if (error instanceof ApiError) {
-    logger.info(`i am in instance api error`)
     statusCode = error?.statusCode
     message = error.message
     errorMessages = error?.message
@@ -33,7 +31,6 @@ const globalErrorHandler: ErrorRequestHandler = (
         ]
       : []
   } else if (error instanceof Error) {
-    logger.info(`i am in instance normal error`)
     message = error?.message
     errorMessages = error?.message
       ? [
@@ -49,7 +46,7 @@ const globalErrorHandler: ErrorRequestHandler = (
     success: false,
     message,
     errorMessages,
-    stack: error?.stack,
+    stack: config.status !== 'production' ? error?.stack : undefined,
   })
 
   next()
