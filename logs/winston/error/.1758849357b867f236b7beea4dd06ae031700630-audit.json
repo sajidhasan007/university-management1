@@ -1,20 +1,20 @@
 {
-    "keep": {
-        "days": true,
-        "amount": 14
+  "keep": {
+    "days": true,
+    "amount": 14
+  },
+  "auditLog": "/home/sajid007/Desktop/Personal/university-management1/logs/winston/error/.1758849357b867f236b7beea4dd06ae031700630-audit.json",
+  "files": [
+    {
+      "date": 1685968968992,
+      "name": "/home/sajid007/Desktop/Personal/university-management1/logs/winston/error/phu-2023-05-06-18-error.log",
+      "hash": "2675e5606a5f6f9992fac2ce59431a1e41e405282c14cc0a8eb8d75522783605"
     },
-    "auditLog": "/home/sajid007/Desktop/Personal/university-management1/logs/winston/error/.1758849357b867f236b7beea4dd06ae031700630-audit.json",
-    "files": [
-        {
-            "date": 1685968968992,
-            "name": "/home/sajid007/Desktop/Personal/university-management1/logs/winston/error/phu-2023-05-06-18-error.log",
-            "hash": "2675e5606a5f6f9992fac2ce59431a1e41e405282c14cc0a8eb8d75522783605"
-        },
-        {
-            "date": 1685972117912,
-            "name": "/home/sajid007/Desktop/Personal/university-management1/logs/winston/error/phu-2023-05-06-19-error.log",
-            "hash": "7000e7cfee15eebe9c196dca09de000c01749e7391c021e0545202039d84094d"
-        }
-    ],
-    "hashType": "sha256"
+    {
+      "date": 1685972117912,
+      "name": "/home/sajid007/Desktop/Personal/university-management1/logs/winston/error/phu-2023-05-06-19-error.log",
+      "hash": "7000e7cfee15eebe9c196dca09de000c01749e7391c021e0545202039d84094d"
+    }
+  ],
+  "hashType": "sha256"
 }
