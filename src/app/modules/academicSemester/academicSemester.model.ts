@@ -5,14 +5,22 @@ import {
 } from './academicSemester.interface';
 import ApiError from '../../../errors/ApiError';
 import status from 'http-status';
+import {
+  academicSemesterCodes,
+  academicSemesterTitles,
+  acdemicSemesterMonths,
+} from './academicSemester.constant';
 
-const academicSemesterSchema = new Schema<IacademicSemester>({
-  title: { type: String, required: true },
-  year: { type: Number, required: true },
-  code: { type: String, required: true },
-  startMonth: { type: String, required: true },
-  endMonth: { type: String, required: true },
-});
+const academicSemesterSchema = new Schema<IacademicSemester>(
+  {
+    title: { type: String, required: true, enum: academicSemesterTitles },
+    year: { type: Number, required: true },
+    code: { type: String, required: true, enum: academicSemesterCodes },
+    startMonth: { type: String, required: true, enum: acdemicSemesterMonths },
+    endMonth: { type: String, required: true, enum: acdemicSemesterMonths },
+  },
+  { timestamps: true }
+);
 
 academicSemesterSchema.pre('save', async function (next) {
   const isExist = await AcademicSemester.findOne({
