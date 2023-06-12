@@ -16,7 +16,7 @@ const getAllSemester = async (
   // sortOrder;
   const { page, limit, skip, sortBy, sortOrder } =
     paginationHelpers.calculatePagination(pagination);
-  const { searchTerm } = filters; // ...filtersData
+  const { searchTerm, ...filtersData } = filters; // ...filtersData
 
   const sortOptions: { [key: string]: SortOrder } = {};
   if (sortBy && sortOrder) {
