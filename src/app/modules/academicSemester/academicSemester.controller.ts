@@ -19,7 +19,7 @@ const getAllSemester: RequestHandler = catchAsync(
     sendReponse<IacademicSemester[]>(res, {
       statusCode: httpStatus.OK,
       success: true,
-      message: 'Semester created successfully!',
+      message: 'Semester retrive successfully!',
       meta: result?.meta,
       data: result?.data,
     });
@@ -43,7 +43,24 @@ const createAcademicSemester: RequestHandler = catchAsync(
   }
 );
 
+const getSingleSemester = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const id = req.params.id;
+
+    const result = await AcademicSemesterService.getSingleSemester(id);
+
+    sendReponse<IacademicSemester>(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: 'Semester retrive successfully!',
+      data: result,
+    });
+    next();
+  }
+);
+
 export const AcademicSemesterController = {
   createAcademicSemester,
   getAllSemester,
+  getSingleSemester,
 };
