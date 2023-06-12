@@ -3,22 +3,46 @@ import ApiError from '../../../errors/ApiError';
 import { IGenericResponse } from '../../../interface/common';
 import { IPaginationOptions } from '../../../interface/pagination';
 import { paginationHelpers } from '../../helper/paginationHelper';
-import { IacademicSemester } from './academicSemester.interface';
+import {
+  IAcademicSemesterFilters,
+  IacademicSemester,
+} from './academicSemester.interface';
 import { AcademicSemester } from './academicSemester.model';
 
 const getAllSemester = async (
-  pagination: IPaginationOptions
+  pagination: IPaginationOptions,
+  filters: IAcademicSemesterFilters
 ): Promise<IGenericResponse<IacademicSemester[]>> => {
   // sortOrder;
   const { page, limit, skip, sortBy, sortOrder } =
     paginationHelpers.calculatePagination(pagination);
+  const { searchTerm } = filters; // ...filtersData
 
   const sortOptions: { [key: string]: SortOrder } = {};
   if (sortBy && sortOrder) {
     sortOptions[sortBy] = sortOrder;
   }
 
-  const result = await AcademicSemester.find()
+  const andConditions = [
+    {
+      $or: [
+        {
+          title: {
+            $regex: searchTerm || '',
+            $options: 'i',
+          },
+        },
+        {
+          code: {
+            $regex: searchTerm || '',
+            $options: 'i',
+          },
+        },
+      ],
+    },
+  ];
+
+  const result = await AcademicSemester.find({ $and: andConditions })
     .sort(sortOptions)
     .limit(limit)
     .skip(skip);
