@@ -82,8 +82,21 @@ const getSingleSemester = async (
   return result;
 };
 
+const updateSemester = async (
+  payload: Partial<IacademicSemester>
+): Promise<IacademicSemester | null> => {
+  const response = AcademicSemester.create(payload);
+
+  if (!response) {
+    throw new ApiError(400, 'Faield to create');
+  }
+
+  return response;
+};
+
 export const AcademicSemesterService = {
   createAcademicSemester,
   getAllSemester,
   getSingleSemester,
+  updateSemester,
 };

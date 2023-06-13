@@ -39,6 +39,11 @@
             "date": 1686542408532,
             "name": "/home/sajid007/Desktop/Personal/university-management1/logs/winston/error/phu-2023-12-06-10-error.log",
             "hash": "a129f01f49f1e9a06a3bf726fa701c4acb3f7965aa25e03191ea7b34802b8ce4"
+        },
+        {
+            "date": 1686651362087,
+            "name": "/home/sajid007/Desktop/Personal/university-management1/logs/winston/error/phu-2023-13-06-16-error.log",
+            "hash": "52cd4fe8976fdaca768a24a06610bdc7be2bf8f99aa2dff9d660d1103d5d3770"
         }
     ],
     "hashType": "sha256"
