@@ -8,6 +8,7 @@ import {
   IacademicSemester,
 } from './academicSemester.interface';
 import { AcademicSemester } from './academicSemester.model';
+import { academicSemesterSearchableFields } from './academicSemester.constant';
 
 const getAllSemester = async (
   pagination: IPaginationOptions,
@@ -23,26 +24,31 @@ const getAllSemester = async (
     sortOptions[sortBy] = sortOrder;
   }
 
-  const andConditions = [
-    {
-      $or: [
-        {
-          title: {
-            $regex: searchTerm || '',
-            $options: 'i',
-          },
-        },
-        {
-          code: {
-            $regex: searchTerm || '',
-            $options: 'i',
-          },
-        },
-      ],
-    },
-  ];
+  const andConditions = [];
 
-  const result = await AcademicSemester.find({ $and: andConditions })
+  if (searchTerm) {
+    andConditions.push({
+      $or: academicSemesterSearchableFields.map(field => ({
+        [field]: {
+          $regex: searchTerm,
+          $options: 'i',
+        },
+      })),
+    });
+  }
+
+  if (Object.keys(filtersData).length) {
+    andConditions.push({
+      $and: Object.entries(filtersData).map(([field, value]) => ({
+        [field]: value,
+      })),
+    });
+  }
+
+  const whereConditions =
+    andConditions.length > 0 ? { $and: andConditions } : {};
+
+  const result = await AcademicSemester.find(whereConditions)
     .sort(sortOptions)
     .limit(limit)
     .skip(skip);
@@ -69,7 +75,15 @@ const createAcademicSemester = async (
   return response;
 };
 
+const getSingleSemester = async (
+  id: string
+): Promise<IacademicSemester | null> => {
+  const result = await AcademicSemester.findById(id);
+  return result;
+};
+
 export const AcademicSemesterService = {
   createAcademicSemester,
   getAllSemester,
+  getSingleSemester,
 };
