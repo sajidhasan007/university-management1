@@ -8,7 +8,11 @@ import {
   IacademicSemester,
 } from './academicSemester.interface';
 import { AcademicSemester } from './academicSemester.model';
-import { academicSemesterSearchableFields } from './academicSemester.constant';
+import {
+  academicSemesterSearchableFields,
+  academicSemesterTitleCodeMapper,
+} from './academicSemester.constant';
+import httpStatus from 'http-status';
 
 const getAllSemester = async (
   pagination: IPaginationOptions,
@@ -66,6 +70,10 @@ const getAllSemester = async (
 const createAcademicSemester = async (
   payload: IacademicSemester
 ): Promise<IacademicSemester | null> => {
+  if (academicSemesterTitleCodeMapper[payload.title] !== payload.code) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Invalid Semester Code');
+  }
+
   const response = AcademicSemester.create(payload);
 
   if (!response) {
@@ -83,15 +91,21 @@ const getSingleSemester = async (
 };
 
 const updateSemester = async (
+  id: string,
   payload: Partial<IacademicSemester>
 ): Promise<IacademicSemester | null> => {
-  const response = AcademicSemester.create(payload);
-
-  if (!response) {
-    throw new ApiError(400, 'Faield to create');
+  if (
+    payload.title &&
+    payload.code &&
+    academicSemesterTitleCodeMapper[payload.title] !== payload.code
+  ) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Invalid Semester Code');
   }
 
-  return response;
+  const result = await AcademicSemester.findOneAndUpdate({ _id: id }, payload, {
+    new: true,
+  });
+  return result;
 };
 
 export const AcademicSemesterService = {
