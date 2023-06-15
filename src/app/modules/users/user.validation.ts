@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { bloodGroup, gender } from '../student/student.constant';
 const createUserZodSchema = z.object({
   body: z.object({
     role: z.string({ required_error: 'Role is require' }),
