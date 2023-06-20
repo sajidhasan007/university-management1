@@ -16,7 +16,7 @@ import {
   generateFacultyId,
   generateStudentId,
 } from './user.utils';
-
+import bcrypt from 'bcrypt';
 const createStudent = async (
   student: IStudent,
   user: IUser
@@ -25,6 +25,9 @@ const createStudent = async (
   if (!user.password) {
     user.password = 'Sd1234@';
   }
+
+  user.password = await bcrypt.hash(user.password, 12);
+
   // set role
   user.role = 'student';
 

@@ -8,4 +8,5 @@ export default {
   status: process.env.STATUS,
   port: process.env.PORT,
   databaseUrl: process.env.DATABASE_URL,
+  saltRounds: process.env.SALT_ROUNDS,
 };

@@ -2,10 +2,11 @@
 import httpStatus from 'http-status';
 import mongoose, { SortOrder } from 'mongoose';
 import ApiError from '../../../errors/ApiError';
-import { paginationHelpers } from '../../../helpers/paginationHelper';
-import { IGenericResponse } from '../../../interfaces/common';
-import { IPaginationOptions } from '../../../interfaces/pagination';
-import { User } from '../user/user.model';
+import { IGenericResponse } from '../../../interface/common';
+import { IPaginationOptions } from '../../../interface/pagination';
+import { paginationHelpers } from '../../helper/paginationHelper';
+import { User } from '../users/user.model';
+
 import { adminSearchableFields } from './admin.constant';
 import { IAdmin, IAdminFilters } from './admin.interface';
 import { Admin } from './admin.model';

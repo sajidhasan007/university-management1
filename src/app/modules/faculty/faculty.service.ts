@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-dgetAllFacultiesisable @typescript-eslint/no-explicit-any */
 import mongoose, { SortOrder } from 'mongoose';
-import { paginationHelpers } from '../../../helpers/paginationHelper';
-import { IGenericResponse } from '../../../interfaces/common';
-import { IPaginationOptions } from '../../../interfaces/pagination';
 
 import httpStatus from 'http-status';
 import ApiError from '../../../errors/ApiError';
-import { User } from '../user/user.model';
 import { facultySearchableFields } from './faculty.constant';
 import { IFaculty, IFacultyFilters } from './faculty.interface';
 import { Faculty } from './faculty.model';
+import { IPaginationOptions } from '../../../interface/pagination';
+import { IGenericResponse } from '../../../interface/common';
+import { paginationHelpers } from '../../helper/paginationHelper';
+import { User } from '../users/user.model';
 
 const getAllFaculties = async (
   filters: IFacultyFilters,
