@@ -11,7 +11,6 @@ const userSchema = new Schema<IUser>(
     role: {
       type: String,
       required: true,
-      unique: true,
     },
     password: {
       type: String,
@@ -21,6 +20,14 @@ const userSchema = new Schema<IUser>(
       type: Schema.Types.ObjectId,
       ref: 'Student',
     },
+    faculty: {
+      type: Schema.Types.ObjectId,
+      ref: 'Faculty',
+    },
+    admin: {
+      type: Schema.Types.ObjectId,
+      ref: 'Admin',
+    },
   },
   {
     timestamps: true,
@@ -29,5 +36,4 @@ const userSchema = new Schema<IUser>(
     },
   }
 );
-
 export const User = model<IUser, UserModel>('User', userSchema);
